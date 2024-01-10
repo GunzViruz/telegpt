@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "name": "bin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "telegpt.js",
+  "scripts": {
+    "start": "node telegpt.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "node-telegram-bot-api": "^0.64.0",
+    "openai": "^4.24.1"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.0"
+  }
+}

@@ -1,7 +1,6 @@
-import OpenAI from "openai";
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
-import request from 'request';
+import OpenAI from 'openai';
 
 dotenv.config();
 
@@ -50,28 +49,17 @@ bot.onText(/\/start/, (msg) => {
 // Handle incoming messages via webhook
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
+    const userId = msg.from.id; // Get user ID from the message
+    const username = msg.from.username; // Get username from the message
     const userMessage = msg.text;
 
     if (userMessage.toLowerCase() === '/start') {
         return;
     }
 
-    const botReply = await answerQuestion(userMessage);
+    const botReply = await answerQuestion(userMessage, userId, username); // Provide userId and username when calling answerQuestion
 
     bot.sendMessage(chatId, botReply);
 });
-
-// Make HTTP request to webhook URL
-request(webhookUrl, function(error, response, html) {
-    if (!error) {
-        if (200 == response.statusCode) {
-            console.log('Webhook request successful.');
-        }
-    } else {
-        console.error('Error making webhook request:', error);
-    }
-}).on('error', function(e) {
-    console.error('Error making webhook request:', e);
-}).end();
 
 console.log('Telegram bot is running...');

@@ -9,7 +9,7 @@ dotenv.config();
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, {
     webHook: {
-        port: process.env.PORT || 4000; // Port number your server is running on
+        port: process.env.PORT || 4000 // Port number your server is running on
     }
 });
 

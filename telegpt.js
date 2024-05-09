@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import TelegramBot from 'node-telegram-bot-api';
 import fs from 'fs';
 import dotenv from 'dotenv';
+import request from 'request';
 
 dotenv.config();
 
@@ -151,5 +152,18 @@ bot.on('message', async (msg) => {
         bot.sendMessage(chatId, 'Sorry, you have reached the daily message limit.');
     }
 });
+
+// Make HTTP request to webhook URL
+request(webhookUrl, function(error, response, html) {
+    if (!error) {
+        if (200 == response.statusCode) {
+            console.log('Webhook request successful.');
+        }
+    } else {
+        console.error('Error making webhook request:', error);
+    }
+}).on('error', function(e) {
+    console.error('Error making webhook request:', e);
+}).end();
 
 console.log('Telegram bot is running...');
